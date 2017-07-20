@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>KFTC Open Platform Python Example</title>
+  </head>
+  <body>
+    <h1>은행권 공동플랫폼 오픈API 예제</h1>
+    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    {% endwith %}
+    
+    <div style="background: #fafafa">
+    {% if session.kftc_token %}
+      <p><b>로그인 되어있음</b></p>
+      <ul>
+        <li><p>user_seq_no: {{ session.kftc_token.user_seq_no }}</p></li>
+        <li><p>scope: {{ session.kftc_token.scope }}</p></li>
+      </ul>
+      <a href="{{ url_for('logout') }}">로그아웃</a>
+    {% else %}
+      <p>로그인되어있지 않음</p>
+    {% endif %}
+    </div>
+
+    {% block content %}{% endblock %}
+  </body>
+</html>
